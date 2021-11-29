@@ -6,22 +6,21 @@
 #include <Windows.h>
 #include <unistd.h>
 
-int i, j, width = 20, height = 20, gayOver, score = 0, x, y, fruitX, fruitY, flag, speed = 200;
+int i, j, width = 20, height = 20, gayOver, score = 0, x, y, fruitX, fruitY, flag, speed = 200, snake[20][20], area[2][400];
 void Render();
 void SettingLVL();
 void UpdateCursore();
-void KeysFlag();
+void SetFlagsOnKey();
 void Move();
 int main()
 {
 	setlocale(0, "rus");
     int m, n;
     SettingLVL();
-    
     while (!gayOver) 
 	{
         Render();
-        KeysFlag();
+        SetFlagsOnKey();
         Move();
     }
 }
@@ -32,10 +31,9 @@ void Render()
 	{
 		for(j = 0; j < width; j++)
 		{
-			if(i == height - 1 || i == 0)
-			printf("*");
-			else if((j == width - 1 || j == 0) && (i != 5 || j != 19))
-			printf("|");
+			area[i][j] = j;
+			if(i == height - 1 || i == 0 || j == width - 1 || j == 0)
+			printf("#");
 			else
 			{
 				if (i == x && j == y)
@@ -64,7 +62,7 @@ label2:
         goto label2;
     score = 0;
 }
-void KeysFlag()
+void SetFlagsOnKey()
 {
     if (kbhit()) {
         switch (getch()) {
