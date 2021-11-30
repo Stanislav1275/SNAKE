@@ -33,7 +33,7 @@ void Render()
 		{
 			area[i][j] = j;
 			if(i == height - 1 || i == 0 || j == width - 1 || j == 0)
-			printf("#");
+			printf("-");
 			else
 			{
 				if (i == x && j == y)
